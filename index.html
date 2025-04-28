@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Parking AGC 24h - Sistema de Estacionamento</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <h1>
+                    🅿 Parking AGC <span>24h</span>
+                    <span id="relogio-logo" class="relogio"></span>
+                </h1>
+                <p>⚡ Sistema de Gerenciamento de Estacionamento</p>
+            </div>
+            <div class="header-info">
+                <div class="total-vagas">
+                    <span id="total-carros">30</span>/30
+                    <i class="fas fa-car"></i>
+                    <span id="total-motos">30</span>/30
+                    <i class="fas fa-motorcycle"></i>
+                </div>
+                <div class="faturamento">
+                    <i class="fas fa-money-bill-wave"></i> R$
+                    <span id="total-faturamento">0.00</span>
+                    <button id="toggle-faturamento" class="btn-toggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="controles">
+                <div class="form-container">
+                    <h2><i class="fas fa-plus-circle"></i> Nova Entrada</h2>
+                    <form id="form-entrada">
+                        <div class="form-group">
+                            <label for="tipo-veiculo"
+                                >🚦 Tipo de Veículo:</label
+                            >
+                            <select id="tipo-veiculo" required>
+                                <option value="">Selecione...</option>
+                                <option value="carro">🚗 Carro</option>
+                                <option value="moto">🛵 Moto</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="placa"
+                                >🔢 Placa:
+                                <small>(ABC1234 ou ABC1D23)</small></label
+                            >
+                            <input
+                                type="text"
+                                id="placa"
+                                placeholder="🚗 ABC1D23 ou ABC-1234"
+                                required
+                            />
+                            <span class="validation-icon"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">📱 Telefone:</label>
+                            <input
+                                type="text"
+                                id="telefone"
+                                placeholder="📱 (11) 98765-4321"
+                                required
+                            />
+                            <span class="validation-icon"></span>
+                        </div>
+                        <button type="submit" class="btn-confirmar">
+                            <i class="fas fa-check"></i> Confirmar Entrada
+                        </button>
+                    </form>
+                </div>
+
+                <div class="busca-container">
+                    <h2><i class="fas fa-search"></i> Buscar Veículo</h2>
+                    <form id="form-busca">
+                        <div class="form-group">
+                            <label for="busca-placa">🔍 Placa:</label>
+                            <input
+                                type="text"
+                                id="busca-placa"
+                                placeholder="🔍 Digite a placa"
+                            />
+                            <span class="validation-icon"></span>
+                        </div>
+                        <button type="submit" class="btn-buscar">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </form>
+                    <div id="resultado-busca" class="resultado-busca"></div>
+                </div>
+            </section>
+
+            <section class="vagas-container">
+                <h2><i class="fas fa-parking"></i> Vagas de Carros</h2>
+                <div class="vagas-grid" id="vagas-carros"></div>
+
+                <h2><i class="fas fa-motorcycle"></i> Vagas de Motos</h2>
+                <div class="vagas-grid" id="vagas-motos"></div>
+            </section>
+        </main>
+
+        <!-- Modal para recibo -->
+        <div id="modal-recibo" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>
+                        <i class="fas fa-receipt"></i> Recibo de Estacionamento
+                        <span class="relogio-modal"></span>
+                    </h2>
+                    <button class="btn-fechar-modal" id="btn-fechar-recibo">
+                        &times;
+                    </button>
+                </div>
+                <div id="recibo-content"></div>
+                <div class="modal-actions">
+                    <button id="btn-enviar-whatsapp" class="btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> Confirmar e Enviar
+                    </button>
+                    <button id="btn-encerrar-vaga" class="btn-fechar">
+                        <i class="fas fa-stop-circle"></i> Encerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para Faturamento -->
+        <div id="modal-faturamento" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>
+                        <i class="fas fa-money-bill-wave"></i> Relatório de
+                        Faturamento
+                    </h2>
+                    <button
+                        class="btn-fechar-modal"
+                        id="btn-fechar-faturamento"
+                    >
+                        &times;
+                    </button>
+                </div>
+                <div id="faturamento-content">
+                    <div class="form-group">
+                        <label for="senha-faturamento">🔑 Senha:</label>
+                        <input
+                            type="password"
+                            id="senha-faturamento"
+                            placeholder="Digite a senha de acesso"
+                        />
+                    </div>
+                    <div id="relatorio-faturamento" style="display: none">
+                        <div class="recibo-header">
+                            <h3>📊 Relatório Completo</h3>
+                        </div>
+                        <div class="recibo-item">
+                            <span>💰 Faturamento Total:</span>
+                            <span class="recibo-valor"
+                                >R$
+                                <span id="total-faturamento-relatorio"
+                                    >0.00</span
+                                ></span
+                            >
+                        </div>
+                        <div class="recibo-item">
+                            <span>🚗 Carros Estacionados:</span>
+                            <span class="recibo-valor"
+                                ><span id="total-carros-relatorio"
+                                    >0</span
+                                ></span
+                            >
+                        </div>
+                        <div class="recibo-item">
+                            <span>🛵 Motos Estacionadas:</span>
+                            <span class="recibo-valor"
+                                ><span id="total-motos-relatorio">0</span></span
+                            >
+                        </div>
+                        <div class="recibo-item">
+                            <span>📅 Data/Hora:</span>
+                            <span class="recibo-valor"
+                                ><span id="data-hora-relatorio"></span
+                            ></span>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="btn-ver-relatorio" class="btn-confirmar">
+                            <i class="fas fa-eye"></i> Ver Relatório
+                        </button>
+                        <button
+                            id="btn-zerar-faturamento"
+                            class="btn-fechar"
+                            disabled
+                        >
+                            <i class="fas fa-trash-alt"></i> Zerar Faturamento
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/parking.js" type="module"></script>
+        <script src="js/realtime-updater.js" type="module"></script>
+        <script src="js/validation.js" type="module"></script>
+        <script src="js/utils.js" type="module"></script>
+        <script src="js/script.js" type="module"></script>
+    </body>
+</html>
+        <script src="js/script.js" type="module"></script>
+        <script src="js/keyboard-fix.js"></script> <!-- Adicionado para correção do teclado -->
+    </body>
+</html>

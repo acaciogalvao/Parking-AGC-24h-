@@ -1,0 +1,691 @@
+/* Reset e Estilos Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo h1 span {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.logo p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.relogio {
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+}
+
+.relogio-modal, .relogio-busca {
+    font-size: 0.9rem;
+    margin-left: 10px;
+    background: rgba(30, 60, 114, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+}
+
+.header-info {
+    display: flex;
+    gap: 2rem;
+}
+
+.total-vagas, .faturamento {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+}
+
+.faturamento {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.faturamento:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.total-vagas i, .faturamento i {
+    font-size: 1.2rem;
+}
+
+.btn-toggle {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    padding: 0.3rem;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.btn-toggle:hover {
+    transform: scale(1.1);
+}
+
+.faturamento.hidden .valor-faturamento {
+    filter: blur(5px);
+    user-select: none;
+}
+
+main {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.controles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.form-container, .busca-container {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.form-container h2, .busca-container h2 {
+    margin-bottom: 1.5rem;
+    color: #1e3c72;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #444;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border 0.3s;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: #2a5298;
+    outline: none;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.validation-icon {
+    position: absolute;
+    right: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+}
+
+.validation-icon .valid {
+    color: #4CAF50;
+}
+
+.validation-icon .invalid {
+    color: #f44336;
+}
+
+button {
+    cursor: pointer;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-confirmar {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    color: white;
+}
+
+.btn-confirmar:hover {
+    background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+    transform: translateY(-2px);
+}
+
+.btn-buscar {
+    background: linear-gradient(135deg, #2196F3 0%, #0D47A1 100%);
+    color: white;
+}
+
+.btn-buscar:hover {
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    transform: translateY(-2px);
+}
+
+.resultado-busca {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 6px;
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    min-height: 100px;
+}
+
+.vagas-container h2 {
+    margin: 1.5rem 0;
+    color: #1e3c72;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vagas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.2rem;
+}
+
+.vaga {
+    background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.vaga:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.vaga-livre {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border-color: #a5d6a7;
+}
+
+.vaga-ocupada {
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    border-color: #ef9a9a;
+}
+
+.vaga-numero {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1e3c72;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vaga-livre .vaga-numero {
+    color: #2E7D32;
+}
+
+.vaga-icone {
+    font-size: 1.5rem;
+}
+
+.vaga-info {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.vaga-placa {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.vaga-horario {
+    color: #666;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.vaga-tempo {
+    color: #666;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin: 0.3rem 0;
+}
+
+.tempo-vaga {
+    font-weight: bold;
+    color: #1e3c72;
+    font-family: 'Courier New', monospace;
+}
+
+.btn-encerrar {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    color: white;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-encerrar:hover {
+    background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.btn-fechar-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+    padding: 0 0.5rem;
+}
+
+.btn-fechar-modal:hover {
+    color: #333;
+}
+
+#recibo-content {
+    padding: 1rem 0;
+    line-height: 1.8;
+}
+
+.recibo-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.recibo-header h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #1e3c72;
+}
+
+.recibo-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed #eee;
+}
+
+.recibo-valor {
+    font-weight: bold;
+    color: #1e3c72;
+}
+
+.recibo-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    gap: 1rem;
+}
+
+.btn-whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-whatsapp:hover {
+    background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+}
+
+.btn-fechar {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    color: white;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-fechar:hover {
+    background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+}
+
+.found-vehicle {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.found-vehicle h3 {
+    color: #1e3c72;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.found-vehicle p {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.found-vehicle strong {
+    min-width: 100px;
+    display: inline-block;
+}
+
+.alert {
+    padding: 0.8rem;
+    background: #ffebee;
+    color: #d32f2f;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.tempo-dinamico, .tempo-dinamico-busca {
+    font-weight: bold;
+    color: #1e3c72;
+    font-family: 'Courier New', monospace;
+}
+
+.valor-dinamico, .valor-dinamico-busca {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.busca-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.btn-fechar-busca {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+    padding: 0 0.5rem;
+    line-height: 1;
+}
+
+.btn-fechar-busca:hover {
+    color: #333;
+}
+
+#relatorio-faturamento {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 6px;
+    background: #f9f9f9;
+    border: 1px solid #eee;
+}
+
+#btn-zerar-faturamento {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+#btn-zerar-faturamento:hover {
+    background: linear-gradient(135deg, #f57c00 0%, #e65100 100%);
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    border-radius: 4px;
+    color: white;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 10000;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-success {
+    background-color: #4CAF50;
+}
+
+.toast-error {
+    background-color: #f44336;
+}
+
+.toast-warning {
+    background-color: #ff9800;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .header-info {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .total-vagas, .faturamento {
+        justify-content: center;
+    }
+
+    .controles {
+        grid-template-columns: 1fr;
+    }
+
+    .logo h1 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .relogio {
+        margin-top: 0.5rem;
+    }
+    
+    .vagas-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 1rem;
+    }
+}
+
+
+/* Centralizar relógio no modo paisagem móvel */
+@media (orientation: landscape) and (max-height: 500px) { 
+    .relogio {
+        text-align: center;
+        display: inline-block; /* Garante que text-align funcione */
+        padding: 0.2rem 1rem; /* Ajusta padding para melhor centralização visual */
+        min-width: 130px; /* Garante alguma largura mínima */
+    }
+}
+
+
+/* Estilos para melhorar a experiência com teclado virtual no modo paisagem */
+.keyboard-open {
+    /* Ajusta o padding quando o teclado está aberto */
+    padding-bottom: 150px;
+}
+
+.keyboard-open .form-group input:focus,
+.keyboard-open .form-group select:focus {
+    /* Destaca o campo focado quando o teclado está aberto */
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+}
+
+/* Ajustes específicos para modo paisagem com teclado aberto */
+@media (orientation: landscape) and (max-height: 500px) {
+    .input-focused .form-container,
+    .input-focused .busca-container {
+        /* Reduz o padding para economizar espaço vertical */
+        padding: 0.8rem;
+    }
+    
+    .input-focused .form-group {
+        /* Reduz a margem entre grupos de formulário */
+        margin-bottom: 0.8rem;
+    }
+    
+    .input-focused .form-group label {
+        /* Reduz o tamanho do label para economizar espaço */
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .input-focused .form-group input,
+    .input-focused .form-group select {
+        /* Ajusta o padding dos campos para economizar espaço */
+        padding: 0.6rem;
+    }
+    
+    .input-focused button {
+        /* Reduz o tamanho dos botões */
+        padding: 0.6rem 1rem;
+    }
+    
+    /* Esconde elementos não essenciais quando um campo está focado */
+    .input-focused .vagas-container,
+    .input-focused .header-info {
+        display: none;
+    }
+    
+    /* Ajusta o cabeçalho para economizar espaço */
+    .input-focused header {
+        padding: 0.5rem;
+    }
+    
+    .input-focused .logo h1 {
+        font-size: 1.5rem;
+    }
+    
+    .input-focused .logo p {
+        display: none;
+    }
+}
